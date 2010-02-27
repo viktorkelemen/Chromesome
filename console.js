@@ -27,25 +27,24 @@
         };
         var ls = function () {
 
-            var result = "",
-                l = 0;
+            var result = [],
+                l = 0,
+                txt = "";
 
             $(current).contents().each( function iterate(index, element) {
                 if (element !== undefined) {
                     if (element.nodeType === 3) {
-                        result = $.trim(element.nodeValue);
-                        if (result.length > 0) {
-                            console.log(result);
-                            l++;
+                        txt = $.trim(element.nodeValue);
+                        if (txt.length > 0) {
+                            result.push(txt);
                         }
                     } else {
-                        console.log(element);
-                        l++;
+                        result.push(element);
                     }
                 }
 
             });
-            return "it has " + l + " children";
+            return result;
         };
 
         var cat = function (element) {
@@ -57,12 +56,22 @@
             } else {
                 return element + " not found.";
             }
-        }
+        };
+        
+        var load = function (file) {
+            
+            $.getScript(file, function (data, status) {
+                console.log(file + " is successfully loaded.");
+            });
+            
+            return file + " is loading.";            
+        };
 
 
         window.cd = cd;
         window.__defineGetter__("ls", ls);
         window.cat = cat;
+        window.load = load;
 
 
         cd("body");
