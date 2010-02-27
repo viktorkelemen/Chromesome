@@ -1,8 +1,3 @@
-// Object.defineProperty( obj, "name", {
-//    get: function(){ return name; },
-//    set: function(value){ name = value; }
-//  });
-
 
     var DEV = {};
     var current;
@@ -76,13 +71,16 @@
             return file + " is loading.";
         };
 
+        var pwd = function () {
+            return current;
+        }
 
         window.cd = cd;
         window.__defineGetter__("ls", ls);
         window.cat = cat;
         window.load = load;
+        window.__defineGetter__("pwd", pwd);
 
-
-        cd("body");
+        cd("html");
 
     });
