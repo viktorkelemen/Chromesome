@@ -13,7 +13,15 @@
             var selected;
 
             if (current !== undefined) {
-                selected = $(element, current)[0];
+
+                if (element === "..") {
+                    selected = $(current).parent()[0];
+                } else if (element === ".") {
+                    selected = current;
+                } else {
+                    selected = $(element, current)[0];
+                }
+
             } else {
                 selected = $(element)[0];
             }
@@ -25,6 +33,7 @@
                 return element + " not found.";
             }
         };
+
         var ls = function () {
 
             var result = [],
@@ -57,14 +66,14 @@
                 return element + " not found.";
             }
         };
-        
+
         var load = function (file) {
-            
+
             $.getScript(file, function (data, status) {
                 console.log(file + " is successfully loaded.");
             });
-            
-            return file + " is loading.";            
+
+            return file + " is loading.";
         };
 
 
