@@ -14,6 +14,8 @@ $( function () {
                     selected = $(current).parent()[0];
                 } else if (element === ".") {
                     selected = current;
+                } else if (element === "/") {
+                    selected = $(document)[0];
                 } else {
                     selected = $(element, current)[0];
                 }
@@ -54,12 +56,15 @@ $( function () {
 
         dev.cat = function (element) {
 
-            var selected = $(element)[0];
+            var selected;
 
-            if (selected !== undefined) {
-                return ($(selected).text());
-            } else {
-                return element + " not found.";
+            if (current !== undefined) {
+                selected = $(element)[0];
+                if (selected !== undefined) {
+                    return ($(selected).text());
+                } else {
+                    return element + " not found.";
+                }
             }
         };
 
@@ -90,6 +95,20 @@ $( function () {
             return result;
         };
 
+        dev.rm = function (element) {
+
+            var selected;
+
+            if (current !== undefined) {
+                selected = $(element, current)[0];
+                if (selected !== undefined) {
+                    return ($(selected).remove());
+                } else {
+                    return element + " not found.";
+                }
+            }
+        };
+
         // dev._reloadConsole = function () {
         //
         //     return dev.load("console.js", function () {
@@ -105,15 +124,15 @@ $( function () {
             });
 
             return result;
-
-        }
+        };
 
         // var target = console.__proto__;
         var target = window;
 
         $([["cd", dev.cd],
           ["cat", dev.cat],
-          ["load", dev.load]
+          ["load", dev.load],
+          ["rm", dev.rm]
           // ["_reload", dev._reloadConsole]
         ]).each( function iterate(index, element) {
             if (target[element[0]] === undefined) {
@@ -133,8 +152,14 @@ $( function () {
         });
 
 
+        // constants, this should be refactored later
+        $(["html","div","h1","h2","h3","h4","p","strong","span","a"]).each( function iterate(index, element) {
+            target[element] = element;
+        });
+
+
         // goes to HTML
-        cd("html");
+        cd(document);
 
 });
 
