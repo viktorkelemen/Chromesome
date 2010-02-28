@@ -1,5 +1,5 @@
 
-    $( function () {
+$( function () {
 
         var dev = {},
             current = undefined;
@@ -63,10 +63,14 @@
             }
         };
 
-        dev.load = function (file) {
+        dev.load = function (file, successHandler) {
 
-            $.getScript(file, function (data, status) {
+            var rnd = Math.random();
+            $.getScript(file + "?rnd=" + rnd, function (data, status) {
                 console.log(file + " is successfully loaded.");
+                if (successHandler !== undefined) {
+                    successHandler();
+                }
             });
 
             return file + " is loading.";
@@ -86,10 +90,23 @@
             return result;
         };
 
-        dev._reloadConsole = function () {
+        // dev._reloadConsole = function () {
+        //
+        //     return dev.load("console.js", function () {
+        //         DEVELOPER_TOOLBAR_EXTENSIONS.init();
+        //     });
+        // };
 
-            dev.load("console.js");
-        };
+        dev.csss = function () {
+
+            var result = [];
+            $("link[rel=stylesheet]").each( function iterate(index, element) {
+                result.push($(element).attr("href"));
+            });
+
+            return result;
+
+        }
 
         // var target = console.__proto__;
         var target = window;
@@ -97,6 +114,7 @@
         $([["cd", dev.cd],
           ["cat", dev.cat],
           ["load", dev.load]
+          // ["_reload", dev._reloadConsole]
         ]).each( function iterate(index, element) {
             if (target[element[0]] === undefined) {
                 target[element[0]] = element[1];
@@ -107,15 +125,16 @@
         $([["ls", dev.ls],
           ["pwd", dev.pwd],
           ["scripts", dev.scripts],
-          ["_reload", dev._reloadConsole]
+          ["csss", dev.csss]
         ]).each( function iterate(index, element) {
             if (target[element[0]] === undefined) {
                 target.__defineGetter__(element[0], element[1]);
             }
         });
 
+
         // goes to HTML
         cd("html");
 
-    });
+});
 
