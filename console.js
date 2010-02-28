@@ -74,8 +74,22 @@
 
         dev.pwd = function () {
             return current;
-        }
+        };
 
+        dev.scripts = function () {
+
+            var result = [];
+            $("script").each( function iterate(index, element) {
+                result.push($(element).attr("src"));
+            });
+
+            return result;
+        };
+
+        dev._reloadConsole = function () {
+
+            dev.load("console.js");
+        };
 
         // var target = console.__proto__;
         var target = window;
@@ -91,7 +105,9 @@
 
 
         $([["ls", dev.ls],
-          ["pwd", dev.pwd]
+          ["pwd", dev.pwd],
+          ["scripts", dev.scripts],
+          ["_reload", dev._reloadConsole]
         ]).each( function iterate(index, element) {
             if (target[element[0]] === undefined) {
                 target.__defineGetter__(element[0], element[1]);
@@ -100,5 +116,6 @@
 
         // goes to HTML
         cd("html");
+
     });
 
