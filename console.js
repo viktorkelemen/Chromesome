@@ -1,9 +1,10 @@
 
-    var DEV = {};
-    var current;
     $( function () {
 
-        var cd = function (element) {
+        var dev = {},
+            current = undefined;
+
+        dev.cd = function (element) {
 
             var selected;
 
@@ -29,7 +30,7 @@
             }
         };
 
-        var ls = function () {
+        dev.ls = function () {
 
             var result = [],
                 l = 0,
@@ -51,7 +52,7 @@
             return result;
         };
 
-        var cat = function (element) {
+        dev.cat = function (element) {
 
             var selected = $(element)[0];
 
@@ -62,7 +63,7 @@
             }
         };
 
-        var load = function (file) {
+        dev.load = function (file) {
 
             $.getScript(file, function (data, status) {
                 console.log(file + " is successfully loaded.");
@@ -71,16 +72,33 @@
             return file + " is loading.";
         };
 
-        var pwd = function () {
+        dev.pwd = function () {
             return current;
         }
 
-        window.cd = cd;
-        window.__defineGetter__("ls", ls);
-        window.cat = cat;
-        window.load = load;
-        window.__defineGetter__("pwd", pwd);
 
+        // var target = console.__proto__;
+        var target = window;
+
+        $([["cd", dev.cd],
+          ["cat", dev.cat],
+          ["load", dev.load]
+        ]).each( function iterate(index, element) {
+            if (target[element[0]] === undefined) {
+                target[element[0]] = element[1];
+            }
+        });
+
+
+        $([["ls", dev.ls],
+          ["pwd", dev.pwd]
+        ]).each( function iterate(index, element) {
+            if (target[element[0]] === undefined) {
+                target.__defineGetter__(element[0], element[1]);
+            }
+        });
+
+        // goes to HTML
         cd("html");
-
     });
+
