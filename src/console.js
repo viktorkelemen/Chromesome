@@ -1,5 +1,6 @@
 
-$( function () {
+var chromesomeInit = function () {
+
 
         var dev = {},
             current = undefined;
@@ -129,23 +130,22 @@ $( function () {
         // var target = console.__proto__;
         var target = window;
 
-        $([["cd", dev.cd],
+        ([["cd", dev.cd],
           ["cat", dev.cat],
           ["load", dev.load],
           ["rm", dev.rm]
           // ["_reload", dev._reloadConsole]
-        ]).each( function iterate(index, element) {
+        ]).forEach( function iterate(element, index, array) {
             if (target[element[0]] === undefined) {
                 target[element[0]] = element[1];
             }
         });
 
-
-        $([["ls", dev.ls],
+        ([["ls", dev.ls],
           ["pwd", dev.pwd],
           ["scripts", dev.scripts],
           ["csss", dev.csss]
-        ]).each( function iterate(index, element) {
+        ]).forEach( function iterate(element, index, array) {
             if (target[element[0]] === undefined) {
                 target.__defineGetter__(element[0], element[1]);
             }
@@ -153,13 +153,16 @@ $( function () {
 
 
         // constants, this should be refactored later
-        $(["html","div","h1","h2","h3","h4","p","strong","span","a"]).each( function iterate(index, element) {
+        (["html","div","h1","h2","h3","h4","p","strong","span","a"]).forEach( function iterate(element, index, array) {
             target[element] = element;
         });
 
 
         // goes to HTML
-        cd(document);
+        // cd(document);
+};
 
-});
+var script = $("<script/>")[0];
+$("head")[0].appendChild(script);
+script.appendChild(document.createTextNode('('+ chromesomeInit +')();'));
 

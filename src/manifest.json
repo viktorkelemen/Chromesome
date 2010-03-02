@@ -1,0 +1,12 @@
+{
+  "name": "Console extensions",
+  "version": "1.0",
+  "description": "Console extensions",
+  
+  "content_scripts": [
+      {
+        "matches": ["http://www.google.com/*"],
+        "js": ["jquery-1.3.2.js", "console.js"]
+      }
+  ]
+}
