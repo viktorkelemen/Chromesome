@@ -164,13 +164,13 @@ var chromesomeInit = function () {
 
 
         // constants, this should be refactored later
-        (["html","div","h1","h2","h3","h4","p","strong","span","a"]).forEach( function iterate(element, index, array) {
+        (["html","head", "body", "script", "link", "div","h1","h2","h3","h4","p","strong","span","a"]).forEach( function iterate(element, index, array) {
             target[element] = element;
         });
 
 
-        // goes to HTML
-        // cd(document);
+        // goes to the document
+        cd('/');
 };
 
 var script = $("<script/>")[0];
