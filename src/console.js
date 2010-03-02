@@ -39,10 +39,10 @@ var chromesomeInit = function () {
                 l = 0,
                 txt = "";
 
-            $(current).contents().each( function iterate(index, element) {
+            current.childNodes.forEach( function iterate(element, index, array) {
                 if (element !== undefined) {
                     if (element.nodeType === 3) {
-                        txt = $.trim(element.nodeValue);
+                        txt = (element.nodeValue || "").replace( /^(\s|\u00A0)+|(\s|\u00A0)+$/g, "");
                         if (txt.length > 0) {
                             result.push(txt);
                         }
@@ -50,8 +50,8 @@ var chromesomeInit = function () {
                         result.push(element);
                     }
                 }
-
             });
+
             return result;
         };
 
