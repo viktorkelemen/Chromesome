@@ -68,29 +68,32 @@ var chromesomeInit = function () {
 
         dev.cat = function (element) {
 
-            var selected;
-
-            if (current !== undefined) {
-                selected = $(element)[0];
-                if (selected !== undefined) {
-                    return ($(selected).text());
-                } else {
-                    return element + " not found.";
-                }
-            }
+            // not implemented yet
+            // var selected;
+            //
+            // if (current !== undefined) {
+            //     selected = $(element)[0];
+            //     if (selected !== undefined) {
+            //         return ($(selected).text());
+            //     } else {
+            //         return element + " not found.";
+            //     }
+            // }
+            return "Not implemented yet";
         };
 
         dev.load = function (file, successHandler) {
 
-            var rnd = Math.random();
-            $.getScript(file + "?rnd=" + rnd, function (data, status) {
-                console.log(file + " is successfully loaded.");
-                if (successHandler !== undefined) {
-                    successHandler();
-                }
-            });
-
-            return file + " is loading.";
+            // var rnd = Math.random();
+            // $.getScript(file + "?rnd=" + rnd, function (data, status) {
+            //     console.log(file + " is successfully loaded.");
+            //     if (successHandler !== undefined) {
+            //         successHandler();
+            //     }
+            // });
+            //
+            // return file + " is loading.";
+            return "Not implemented yet";
         };
 
         dev.pwd = function () {
@@ -99,43 +102,42 @@ var chromesomeInit = function () {
 
         dev.scripts = function () {
 
-            var result = [];
-            $("script").each( function iterate(index, element) {
-                result.push($(element).attr("src"));
-            });
+            var result = [],
+                scripts = document.getElementsByTagName('script');
+
+            for (var i = 0; i < scripts.length; i++)  {
+                result.push(scripts[i]);
+            }
 
             return result;
         };
 
         dev.rm = function (element) {
 
-            var selected;
+            // var selected;
+            //
+            // if (current !== undefined) {
+            //     selected = $(element, current)[0];
+            //     if (selected !== undefined) {
+            //         return ($(selected).remove());
+            //     } else {
+            //         return element + " not found.";
+            //     }
+            // }
+            return "Not implemented yet";
 
-            if (current !== undefined) {
-                selected = $(element, current)[0];
-                if (selected !== undefined) {
-                    return ($(selected).remove());
-                } else {
-                    return element + " not found.";
-                }
-            }
         };
 
-        // dev._reloadConsole = function () {
-        //
-        //     return dev.load("console.js", function () {
-        //         DEVELOPER_TOOLBAR_EXTENSIONS.init();
-        //     });
-        // };
 
         dev.csss = function () {
 
-            var result = [];
-            $("link[rel=stylesheet]").each( function iterate(index, element) {
-                result.push($(element).attr("href"));
-            });
-
-            return result;
+            // var result = [];
+            // $("link[rel=stylesheet]").each( function iterate(index, element) {
+            //     result.push($(element).attr("href"));
+            // });
+            //
+            // return result;
+            return "Not implemented yet";
         };
 
         // var target = console.__proto__;
@@ -165,12 +167,13 @@ var chromesomeInit = function () {
 
         // constants, this should be refactored later
         (["html","head", "body", "script", "link", "div","h1","h2","h3","h4","p","strong","span","a"]).forEach( function iterate(element, index, array) {
+            // we overwrite everything, yeah
             target[element] = element;
         });
 
 
         // goes to the document
-        cd('/');
+        current = document;
 };
 
 var script = $("<script/>")[0];
