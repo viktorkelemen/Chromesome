@@ -42,42 +42,45 @@ var chromesomeInit = function () {
         } else {
             return nodeDescription + " not found.";
         }
-
     }
 
+    /**
+    * Lists the childnodes of the current node
+    *
+    * @return {Array}
+    */
+    function ls () {
+        
+        var result = [],
+            l = 0,
+            txt = "",
+            children, element;
 
-        dev.ls = function () {
+        if (current === undefined) {
+            return [];
+        }
 
-            var result = [],
-                l = 0,
-                txt = "",
-                children, element;
-
-            if (current === undefined) {
-                return [];
-            }
-
-            if (current === undefined || !current.hasChildNodes()) {
-                return [];
-            } else {
-               children = current.childNodes;
-               for (var i = 0; i < children.length; i++)  {
-                   element = children[i];
-                   if (element !== undefined) {
-                       if (element.nodeType === 3) {
-                           txt = (element.nodeValue || "").replace( /^(\s|\u00A0)+|(\s|\u00A0)+$/g, "");
-                           if (txt.length > 0) {
-                               result.push(txt);
-                           }
-                       } else {
-                           result.push(element);
+        if (current === undefined || !current.hasChildNodes()) {
+            return [];
+        } else {
+           children = current.childNodes;
+           for (var i = 0; i < children.length; i++)  {
+               element = children[i];
+               if (element !== undefined) {
+                   if (element.nodeType === 3) {
+                       txt = (element.nodeValue || "").replace( /^(\s|\u00A0)+|(\s|\u00A0)+$/g, "");
+                       if (txt.length > 0) {
+                           result.push(txt);
                        }
+                   } else {
+                       result.push(element);
                    }
                }
+           }
 
-               return result;
-            }
-        };
+           return result;
+        }
+    }
 
         dev.cat = function (element) {
 
@@ -167,7 +170,7 @@ var chromesomeInit = function () {
             }
         });
 
-        ([["ls", dev.ls],
+        ([["ls", ls],
           ["pwd", dev.pwd],
           ["scripts", dev.scripts],
           ["csss", dev.csss]
