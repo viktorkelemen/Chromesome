@@ -12,17 +12,17 @@ var chromesomeInit = function () {
             if (current !== undefined) {
 
                 if (element === "..") {
-                    selected = $(current).parent()[0];
+                    selected = current.parentNode;
                 } else if (element === ".") {
                     selected = current;
                 } else if (element === "/") {
-                    selected = $(document)[0];
+                    selected = document;
                 } else {
-                    selected = $(element, current)[0];
+                    selected = current.getElementsByTagName(element)[0];
                 }
 
             } else {
-                selected = $(element)[0];
+                selected = document.getElementsByTagName(element)[0];
             }
 
             if (selected !== undefined) {
