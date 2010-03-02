@@ -37,22 +37,33 @@ var chromesomeInit = function () {
 
             var result = [],
                 l = 0,
-                txt = "";
+                txt = "",
+                children, element;
 
-            current.childNodes.forEach( function iterate(element, index, array) {
-                if (element !== undefined) {
-                    if (element.nodeType === 3) {
-                        txt = (element.nodeValue || "").replace( /^(\s|\u00A0)+|(\s|\u00A0)+$/g, "");
-                        if (txt.length > 0) {
-                            result.push(txt);
-                        }
-                    } else {
-                        result.push(element);
-                    }
-                }
-            });
+            if (current === undefined) {
+                return [];
+            }
 
-            return result;
+            if (current === undefined || !current.hasChildNodes()) {
+                return [];
+            } else {
+               children = current.childNodes;
+               for (var i = 0; i < children.length; i++)  {
+                   element = children[i];
+                   if (element !== undefined) {
+                       if (element.nodeType === 3) {
+                           txt = (element.nodeValue || "").replace( /^(\s|\u00A0)+|(\s|\u00A0)+$/g, "");
+                           if (txt.length > 0) {
+                               result.push(txt);
+                           }
+                       } else {
+                           result.push(element);
+                       }
+                   }
+               }
+
+               return result;
+            }
         };
 
         dev.cat = function (element) {
