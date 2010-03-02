@@ -7,36 +7,44 @@
 var chromesomeInit = function () {
 
 
-        var dev = {},
-            current = undefined;
+    var dev = {},
+        current = undefined;
 
-        dev.cd = function (element) {
+    /**
+    * Changes the current node to the first childnode that matches the nodeDescription
+    *
+    * @param nodeDescription {String}
+    * @return HtmlNode
+    */
+    function cd (nodeDescription) {
 
-            var selected;
+        var selected;
 
-            if (current !== undefined) {
+        if (current !== undefined) {
 
-                if (element === "..") {
-                    selected = current.parentNode;
-                } else if (element === ".") {
-                    selected = current;
-                } else if (element === "/") {
-                    selected = document;
-                } else {
-                    selected = current.getElementsByTagName(element)[0];
-                }
-
+            if (nodeDescription === "..") {
+                selected = current.parentNode;
+            } else if (nodeDescription === ".") {
+                selected = current;
+            } else if (nodeDescription === "/") {
+                selected = document;
             } else {
-                selected = document.getElementsByTagName(element)[0];
+                selected = current.getElementsByTagName(nodeDescription)[0];
             }
 
-            if (selected !== undefined) {
-                current = selected;
-                return current;
-            } else {
-                return element + " not found.";
-            }
-        };
+        } else {
+            selected = document.getElementsByTagName(nodeDescription)[0];
+        }
+
+        if (selected !== undefined) {
+            current = selected;
+            return current;
+        } else {
+            return nodeDescription + " not found.";
+        }
+
+    }
+
 
         dev.ls = function () {
 
@@ -148,7 +156,7 @@ var chromesomeInit = function () {
         // var target = console.__proto__;
         var target = window;
 
-        ([["cd", dev.cd],
+        ([["cd", cd],
           ["cat", dev.cat],
           ["load", dev.load],
           ["rm", dev.rm]
