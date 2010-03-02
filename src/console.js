@@ -1,4 +1,9 @@
-
+/*!
+ * Chromesome Chrome Developer Toolbar extension
+ *
+ * Copyright (c) 2010 Viktor Kelemen
+ * Dual licensed under the MIT and GPL licenses.
+ */
 var chromesomeInit = function () {
 
 
@@ -176,7 +181,11 @@ var chromesomeInit = function () {
         current = document;
 };
 
-var script = $("<script/>")[0];
-$("head")[0].appendChild(script);
-script.appendChild(document.createTextNode('('+ chromesomeInit +')();'));
+// inserting it to the DOM
+var script = document.createElement("script"),
+    head = document.getElementsByTagName('head')[0];
+if (head !== undefined) {
+    head.appendChild(script);
+    script.appendChild(document.createTextNode('('+ chromesomeInit +')();'));
+}
 
