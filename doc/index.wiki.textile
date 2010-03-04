@@ -1,0 +1,45 @@
+Chromesome is a Google Chrome extension, a set of command-line commands for the Developer Toolbar.
+
+h2. In action
+
+You can see it in action on the google.com
+<a href="http://www.flickr.com/photos/kelemen_viktor/4401762032/sizes/o/"><img src="http://farm5.static.flickr.com/4061/4401762032_0b36844645.jpg" width="500" height="405" /></a>
+
+h2. Currently supported commands
+
+
+h3. cd (nodeDescription)
+
+Changes the current node to the first childnode that matches the nodeDescription.
+<pre>
+<code>> cd(body)</code>
+</pre>
+
+<hr/>
+
+h3. ls
+
+Lists the childnodes of the current node.
+<pre>
+<code>> ls</code>
+</pre>
+
+<hr/>
+
+h3. pwd
+
+Returns the current node.
+<pre>
+<code>> pwd</code>
+</pre>
+
+<hr/>
+
+h3. scripts
+
+Shows all the script elements found in the DOM.
+<pre>
+<code>> scripts</code>
+</pre>
+
+<hr/>
