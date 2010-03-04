@@ -23,7 +23,7 @@ Documentation
 
 <div id="github_notice">
 <strong>Note:</strong> If you are viewing this on GitHub, the links below will not work. Find the pages listed below in the <strong>docs/</strong> directory of this repository.
-
+</div>
 
 Contributors
 ------------
