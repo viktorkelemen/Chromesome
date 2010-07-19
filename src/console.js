@@ -184,18 +184,18 @@ var chromesomeInit = function () {
     */
     function rm(nodeDescription) {
 
-        // var selected;
-        //
-        // if (current !== undefined) {
-        //     selected = $(element, current)[0];
-        //     if (selected !== undefined) {
-        //         return ($(selected).remove());
-        //     } else {
-        //         return element + " not found.";
-        //     }
-        // }
-        return "Not implemented yet";
+        var selected;
 
+        selected = selectNode(nodeDescription);
+
+        if (selected !== undefined) {
+            if (selected.parentNode !== undefined) {
+                selected.parentNode.removeChild(selected);
+                return nodeDescription + " removed";
+            }
+        } else {
+            return nodeDescription + " not found.";
+        }
     }
 
     /*
