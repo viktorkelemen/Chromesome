@@ -26,7 +26,7 @@ var chromesomeInit = function () {
         // it's an object
         if (typeof nodeDescription === "object") {
            selected = nodeDescription;
-        } else if (current !== undefined) {
+        } else if (current != null) {
 
             if (nodeDescription === "..") {
                 selected = current.parentNode;
@@ -158,7 +158,10 @@ var chromesomeInit = function () {
             result.push(scripts[i]);
         }
 
-        return result;
+        result.forEach( function (element, index, array) {
+            console.log(element);
+        })
+        return result.length + " script node(s)";
     }
 
     /**
