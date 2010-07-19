@@ -13,13 +13,7 @@ var chromesomeInit = function () {
 
     var current = undefined;
 
-    /**
-    * Changes the current node to the first childnode that matches the nodeDescription
-    *
-    * @param nodeDescription {String}
-    * @return HtmlNode
-    */
-    function cd(nodeDescription) {
+    function selectNode(nodeDescription) {
 
         var selected;
 
@@ -41,6 +35,22 @@ var chromesomeInit = function () {
         } else {
             selected = document.querySelector(nodeDescription);
         }
+
+        return selected;
+    }
+
+    /**
+    * Changes the current node to the first childnode that matches the nodeDescription
+    *
+    * @param nodeDescription {String}
+    * @return HtmlNode
+    */
+    function cd(nodeDescription) {
+
+        var selected;
+
+        selected = selectNode(nodeDescription);
+
 
         if (selected !== undefined) {
             current = selected;
@@ -99,18 +109,17 @@ var chromesomeInit = function () {
     */
     function cat(nodeDescription) {
 
-        // not implemented yet
-        // var selected;
-        //
-        // if (current !== undefined) {
-        //     selected = $(element)[0];
-        //     if (selected !== undefined) {
-        //         return ($(selected).text());
-        //     } else {
-        //         return element + " not found.";
-        //     }
-        // }
-        return "Not implemented yet";
+
+        var selected;
+
+        selected = selectNode(nodeDescription);
+
+        if (selected != null && selected.innerHTML !== undefined) {
+            return selected.innerHTML;
+        } else {
+            return nodeDescription + " not found.";
+        }
+
     }
 
     /**
@@ -231,8 +240,6 @@ var chromesomeInit = function () {
             Object.defineProperty( target, element[0], {
               get: function(){ return element[1](); }
             });
-
-            // target.__defineGetter__(element[0], element[1]);
         }
     });
 
