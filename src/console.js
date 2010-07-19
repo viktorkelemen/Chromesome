@@ -13,6 +13,8 @@ var chromesomeInit = function () {
 
     var current = undefined;
 
+    var lastResult = undefined;
+
     function selectNode(nodeDescription) {
 
         var selected;
@@ -93,6 +95,8 @@ var chromesomeInit = function () {
                    }
                }
            }
+
+           lastResult = result;
 
            result.forEach( function (element, index, array) {
                console.log(element);
@@ -208,15 +212,7 @@ var chromesomeInit = function () {
         return "Not implemented yet";
     }
 
-    /*
-    * Noconflict
-    */
-    function setNoConflictMode() {
 
-
-    }
-
-    // var target = console.__proto__;
     // we put everything into the global namespace
     var target = window;
 
@@ -252,6 +248,13 @@ var chromesomeInit = function () {
             console.warn(element + " is already defined.");
         }
     });
+
+
+    // last result getter
+    Object.defineProperty( target, "result", {
+      get: function(){ return lastResult; }
+    });
+
 
 
     // goes to the document
