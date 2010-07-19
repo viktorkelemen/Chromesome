@@ -7,6 +7,9 @@
 var chromesomeInit = function () {
 
 
+    var STR_CONSTANTS = [ "body", "html", "head", "script", "link", "div","h1","h2","h3","h4","p","strong","span","a" ];
+
+
     var current = undefined;
 
     /**
@@ -19,7 +22,10 @@ var chromesomeInit = function () {
 
         var selected;
 
-        if (current !== undefined) {
+        // it's an object
+        if (typeof nodeDescription === "object") {
+           selected = nodeDescription;
+        } else if (current !== undefined) {
 
             if (nodeDescription === "..") {
                 selected = current.parentNode;
@@ -28,11 +34,13 @@ var chromesomeInit = function () {
             } else if (nodeDescription === "/") {
                 selected = document;
             } else {
-                selected = current.getElementsByTagName(nodeDescription)[0];
+                selected = current.querySelector(nodeDescription);
+                // selected = current.getElementsByTagName(nodeDescription)[0];
             }
 
         } else {
-            selected = document.getElementsByTagName(nodeDescription)[0];
+            selected = document.querySelector(nodeDescription);
+            // selected = document.getElementsByTagName(nodeDescription)[0];
         }
 
         if (selected !== undefined) {
@@ -195,13 +203,13 @@ var chromesomeInit = function () {
     }
 
     // var target = console.__proto__;
+    // we put everything into the global namespace
     var target = window;
 
     ([["cd", cd],
       ["cat", cat],
       ["load", load],
       ["rm", rm]
-      // ["_reload", dev._reloadConsole]
     ]).forEach( function iterate(element, index, array) {
         if (target[element[0]] === undefined) {
             target[element[0]] = element[1];
@@ -218,11 +226,14 @@ var chromesomeInit = function () {
         }
     });
 
-
     // constants, this should be refactored later
-    (["html","head", "body", "script", "link", "div","h1","h2","h3","h4","p","strong","span","a"]).forEach( function iterate(element, index, array) {
-        // we overwrite everything, yeah
-        target[element] = element;
+    STR_CONSTANTS.forEach( function iterate(element, index, array) {
+        // we overwrite everything,
+        if (target[element] === undefined) {
+            target[element] = element;
+        } else {
+            console.warn(element + " is already defined.");
+        }
     });
 
 
