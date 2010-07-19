@@ -7,7 +7,8 @@
 var chromesomeInit = function () {
 
 
-    var STR_CONSTANTS = [ "body", "html", "head", "script", "link", "div","h1","h2","h3","h4","p","strong","span","a" ];
+    var STR_CONSTANTS = [ "body", "html", "head", "script", "link", "div",
+                          "h1", "h2", "h3", "h4", "p", "strong", "span", "a" ];
 
 
     var current = undefined;
@@ -35,12 +36,10 @@ var chromesomeInit = function () {
                 selected = document;
             } else {
                 selected = current.querySelector(nodeDescription);
-                // selected = current.getElementsByTagName(nodeDescription)[0];
             }
 
         } else {
             selected = document.querySelector(nodeDescription);
-            // selected = document.getElementsByTagName(nodeDescription)[0];
         }
 
         if (selected !== undefined) {
@@ -54,7 +53,7 @@ var chromesomeInit = function () {
     /**
     * Lists the childnodes of the current node
     *
-    * @return {Array}
+    * @return {String} number of elements
     */
     function ls() {
 
@@ -85,7 +84,10 @@ var chromesomeInit = function () {
                }
            }
 
-           return result;
+           result.forEach( function (element, index, array) {
+               console.log(element);
+           })
+           return result.length + " node(s)";
         }
     }
 
@@ -222,7 +224,12 @@ var chromesomeInit = function () {
       ["csss", csss]
     ]).forEach( function iterate(element, index, array) {
         if (target[element[0]] === undefined) {
-            target.__defineGetter__(element[0], element[1]);
+
+            Object.defineProperty( target, element[0], {
+              get: function(){ return element[1](); }
+            });
+
+            // target.__defineGetter__(element[0], element[1]);
         }
     });
 
@@ -239,6 +246,7 @@ var chromesomeInit = function () {
 
     // goes to the document
     current = document;
+
 };
 
 // inserting it to the DOM
