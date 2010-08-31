@@ -1,7 +1,7 @@
 {
   "name": "Chromesome command-line",
-  "version": "1.0",
-  "description": "Chromesome is a extension for the Developer Toolbar",
+  "version": "1.1",
+  "description": "Chromesome is an extension for the Developer Toolbar",
   
   "content_scripts": [
       {
