@@ -2,7 +2,6 @@
  * Chromesome Chrome Developer Toolbar extension
  *
  * Copyright (c) 2010 Viktor Kelemen
- * Dual licensed under the MIT and GPL licenses.
  */
 var chromesomeInit = function () {
 
@@ -134,15 +133,6 @@ var chromesomeInit = function () {
     */
     function load(fileName, successHandler) {
 
-        // var rnd = Math.random();
-        // $.getScript(file + "?rnd=" + rnd, function (data, status) {
-        //     console.log(file + " is successfully loaded.");
-        //     if (successHandler !== undefined) {
-        //         successHandler();
-        //     }
-        // });
-        //
-        // return file + " is loading.";
         return "Not implemented yet";
     }
 
@@ -203,17 +193,12 @@ var chromesomeInit = function () {
     */
     function csss() {
 
-        // var result = [];
-        // $("link[rel=stylesheet]").each( function iterate(index, element) {
-        //     result.push($(element).attr("href"));
-        // });
-        //
-        // return result;
         return "Not implemented yet";
     }
 
 
     // we put everything into the global namespace
+    // this will change
     var target = window;
 
     ([["cd", cd],
