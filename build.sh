@@ -1,6 +1,7 @@
 #!/bin/bash
 # Makes it ready to be uploaded
 
+mkdir bin
 cd ./src
 
 # version number of the extension
